@@ -1,25 +1,28 @@
+/* eslint-disable camelcase */
 import { CardContainer, CardHeader } from './styles'
+import { formatDistanceToNow } from 'date-fns'
+import ptBr from 'date-fns/locale/pt-BR'
 
-export function PublicationCard() {
+interface IssueCardType {
+  title: string
+  created_at: string
+  body: string
+}
+
+export function PublicationCard({ title, created_at, body }: IssueCardType) {
+  const date = formatDistanceToNow(new Date(created_at), {
+    addSuffix: true,
+    locale: ptBr,
+  })
+
   return (
     <CardContainer>
       <CardHeader>
-        <h2>JavaScript data types and data structures</h2>
-        <span>Há 1 dia</span>
+        <h2>{title}</h2>
+        <span>{date}</span>
       </CardHeader>
 
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn. Dynamic typing
-        JavaScript is a loosely typed and dynamic language. Variables in
-        JavaScript are not directly associated with any particular value type,
-        and any variable can be assigned (and re-assigned) values of all types:
-        let foo = 42; // foo is now a number foo = bar; // foo is now a string
-        foo = true; // foo is now a boolean
-      </p>
+      <p>{body}</p>
     </CardContainer>
   )
 }

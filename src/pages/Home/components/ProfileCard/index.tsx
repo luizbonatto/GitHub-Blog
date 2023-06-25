@@ -22,7 +22,7 @@ interface ProfileDataType {
   followers: number
   bio: string
   name: string
-  home_url: string
+  html_url: string
   avatar_url: string
 }
 
@@ -33,35 +33,23 @@ export function ProfileCard() {
     followers: 0,
     bio: '',
     name: '',
-    home_url: '',
+    html_url: '',
     avatar_url: '',
   })
-  const user = 'maykbrito'
+
+  const user = 'diego3g'
 
   const userDetails = async () => {
     const response = await api.get(`users/${user}`)
 
-    const { login, company, followers, bio, name, home_url, avatar_url } =
-      response.data
-
-    const responseAPI = {
-      login,
-      company,
-      followers,
-      bio,
-      name,
-      home_url,
-      avatar_url,
-    }
-
-    setProfileData(responseAPI)
+    setProfileData(response.data)
   }
 
   useEffect(() => {
     userDetails()
   }, [])
 
-  const { login, company, followers, bio, name, home_url, avatar_url } =
+  const { login, company, followers, bio, name, html_url, avatar_url } =
     profileData
 
   return (
@@ -71,8 +59,10 @@ export function ProfileCard() {
         <NameSession>
           <h1>{name}</h1>
           <div>
-            <a href={home_url}>GitHub</a>
-            <a href={home_url}>
+            <a href={html_url} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <a href={html_url} target="_blank" rel="noreferrer">
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </a>
           </div>

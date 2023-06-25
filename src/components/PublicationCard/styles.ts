@@ -5,6 +5,7 @@ export const CardContainer = styled.div`
   background: ${(props) => props.theme['base-post']};
   border-radius: 10px;
   height: 26rem;
+  max-width: 41.6rem;
 
   p {
     display: -webkit-box;
